@@ -51,6 +51,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
+- **构建**：未配置 `DATABASE_URL` 时，脚本会用临时空 SQLite 完成 `prisma generate` + schema 同步，以便通过构建；**线上数据**仍需在 Vercel 环境变量里配置真实的 **`DATABASE_URL`**（当前 schema 为 SQLite 连接串；生产建议改为 [Neon](https://neon.tech) 等 Postgres 并调整 `schema.prisma` 的 `provider` 与迁移）。
+- 其余变量：`NEXT_PUBLIC_SITE_URL`、`ADMIN_SESSION_SECRET`、`ADMIN_PASSWORD` 等按需在 Vercel → Settings → Environment Variables 中设置。
+
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
