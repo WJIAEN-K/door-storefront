@@ -6,7 +6,7 @@ import { routing } from "./i18n/routing";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   /** Admin lives at /admin only; /zh/admin or /en/admin would 404 without redirect */
