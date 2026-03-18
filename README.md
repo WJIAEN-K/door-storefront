@@ -1,4 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Honch 恒诚 — Door storefront
+
+英文品牌 **Honch**，中文品牌 **恒诚**。Next.js + next-intl（中/英）。
+
+## SEO 与生产环境
+
+1. 复制 `.env.example` 为 `.env.local`，设置 **`NEXT_PUBLIC_SITE_URL`** 为实际上线域名（勿带末尾 `/`），例如 `https://www.honch.com`。
+2. 自动生成 **`/sitemap.xml`**、**`/robots.txt`**。
+3. 全站 **`metadataBase`**、**canonical**、**hreflang**（`en` / `zh-CN` / `x-default`）、**Open Graph**、**Twitter Card**、**关键词**。
+4. 结构化数据：**Organization + WebSite**（全站）；**Product**（各 SKU 详情页）。
+
+## Database & admin
+
+1. Copy `.env.example` → `.env.local` (or `.env`), set **`DATABASE_URL`**, **`ADMIN_PASSWORD`**, **`ADMIN_SESSION_SECRET`**.
+2. `npx prisma migrate dev` then `npm run db:seed` (or first migrate runs seed automatically).
+3. **Admin** (no public link): open **`/admin/login`**, manage **articles** (Markdown, home carousel) and **SKUs**. Production: point `DATABASE_URL` to Postgres (Neon, etc.) and run migrations.
+
+## Door photography (`public/doors`)
+
+门图与视频素材已放在本项目内：`door-storefront/public/doors`（门1–门12 及 `视频素材*.mp4`）。SKU 与路径对应关系见 `src/lib/site-data.ts`。
 
 ## Getting Started
 
@@ -14,7 +33,10 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+开发服务器监听 **`0.0.0.0:3000`**：`pnpm dev` 后，本机 [http://localhost:3000](http://localhost:3000)，局域网 **`http://<本机IP>:3000`**（如 `http://192.168.1.5:3000`）可访问整站含 **`/admin`**。
+
+- **`next.config.ts`** 已配置 **`allowedDevOrigins`**（常见私网 `192.168.*.*`、`10.*.*.*`、`172.16–31.*.*`、`*.local`），避免 Next 开发模式拦截来自手机/其他电脑的 `/_next/*` 请求导致白屏。
+- 仍无法打开时：① 本机防火墙放行 **3000**；② 手机与电脑同一 Wi‑Fi；③ 非常用网段在 `.env.local` 设 **`ALLOWED_DEV_ORIGINS`**（逗号分隔主机名）后**重启** `pnpm dev`。
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

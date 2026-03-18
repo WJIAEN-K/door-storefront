@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+:root {
+  --background: 247 243 238;
+  --foreground: 15 23 42;
+  --surface: 255 255 255;
+  --surface-soft: 255 255 255 / 0.72;
+  --border: 15 23 42 / 0.08;
+  --muted: 91 100 117;
+  --accent: 154 106 67;
+  --accent-soft: 242 229 215;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(154, 106, 67, 0.06), transparent 32%),
+    rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+* {
+  border-color: rgb(var(--border));
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.22);
+  color: rgb(var(--foreground));
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), serif;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
